@@ -12,7 +12,7 @@ function TrackingPage({ cart }) {
 
   useEffect(() => {
     axios
-      .get(`/api/orders/${orderId}?expand=products`)
+      .get(`https://ecommerce-app-i8sy.onrender.com/api/orders/${orderId}?expand=products`)
       .then((response) => setOrder(response.data));
 
     

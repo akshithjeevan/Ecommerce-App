@@ -16,9 +16,12 @@ function DeliveryOptions({ cartItem, deliveryOptions, loadCart }) {
           }
 
           const updateDeliveryOption = async () => {
-            await axios.put(`/api/cart-items/${cartItem.productId}`, {
-              deliveryOptionId: deliveryOption.id,
-            });
+         await axios.put(
+  `https://ecommerce-app-i8sy.onrender.com/api/cart-items/${cartItem.productId}`,
+  {
+    deliveryOptionId: deliveryOption.id,
+  }
+);
             await loadCart();
           };
 

@@ -15,14 +15,19 @@ export function OrderSummary({ cart, deliveryOptions, loadCart }) {
           );
 
           const deleteCartItem = async () => {
-            await axios.delete(`/api/cart-items/${cartItem.productId}`);
+          await axios.delete(
+  `https://ecommerce-app-i8sy.onrender.com/api/cart-items/${cartItem.productId}`
+);
             await loadCart();
           };
 
           const updateCartItem = async () => {
-            await axios.put(`/api/cart-items/${cartItem.productId}`, {
-              quantity: cartItem.quantity + 1,
-            });
+           await axios.put(
+  `https://ecommerce-app-i8sy.onrender.com/api/cart-items/${cartItem.productId}`,
+  {
+    quantity: cartItem.quantity + 1,
+  }
+);
 
             await loadCart();  
           };
