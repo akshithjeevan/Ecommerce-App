@@ -1,38 +1,47 @@
 import axios from "axios";
 import React from "react";
-import { useState } from "react"; 
+import { useState } from "react";
 import { formatMoney } from "../../utils/money";
 
+function Product({ product, loadCart }) {
 
+  const [quantity, setQuantity] = useState(1);
 
+  const addToCart = async () => {
 
-function Product({product,loadCart}) {
- const [quantity, setQuantity] = useState(1);
-         
+    await axios.post(
+      "https://ecommerce-app-i8sy.onrender.com/api/cart-items",
+      {
+        productId: product.id,
+        quantity: quantity,
+      }
+    );
 
- const addToCart =async () => {
-          await axios.post("/api/cart-items", {
-            productId: product.id,
-            quantity: quantity,
-          });
-          await loadCart();
- }
-    
-const selectQuantity =(event) => {
-            const quantitySelected = Number(event.target.value);
-            setQuantity(quantitySelected);
-          }
+    await loadCart();
+  };
+
+  const selectQuantity = (event) => {
+    const quantitySelected = Number(event.target.value);
+    setQuantity(quantitySelected);
+  };
+
   return (
-    <div  className="product-container"
-    data-testid="product-container">
+    <div
+      className="product-container"
+      data-testid="product-container"
+    >
+
       <div className="product-image-container">
-        <img className="product-image" src={product.image} 
-       data-testid="product-image"  />
-
-
+        <img
+          className="product-image"
+          src={product.image}
+          data-testid="product-image"
+        />
       </div>
 
-      <div className="product-name limit-text-to-2-lines">{product.name}</div>
+      <div className="product-name limit-text-to-2-lines">
+        {product.name}
+      </div>
 
       <div className="product-rating-container">
         <img
@@ -40,17 +49,20 @@ const selectQuantity =(event) => {
           data-testid="product-rating-stars-image"
           src={`images/ratings/rating-${product.rating.stars * 10}.png`}
         />
+
         <div className="product-rating-count link-primary">
           {product.rating.count}
         </div>
       </div>
 
-      <div className="product-price">{formatMoney(product.priceCents)}</div>
+      <div className="product-price">
+        {formatMoney(product.priceCents)}
+      </div>
 
       <div className="product-quantity-container">
         <select
-          value={quantity} onChange={selectQuantity}
-
+          value={quantity}
+          onChange={selectQuantity}
         >
           <option value="1">1</option>
           <option value="2">2</option>
@@ -75,9 +87,11 @@ const selectQuantity =(event) => {
       <button
         className="add-to-cart-button button-primary"
         data-testid="add-to-cart-button"
-        onClick={addToCart}>
+        onClick={addToCart}
+      >
         Add to Cart
       </button>
+
     </div>
   );
 }

@@ -24,7 +24,9 @@ useEffect(()=>{
 
 const getHomeData =async ()=>{
 
-const response = await axios.get('/api/products');
+const response = await axios.get(
+  'https://ecommerce-app-i8sy.onrender.com/api/products'
+);
 setProducts(response.data);
 };
 getHomeData();
